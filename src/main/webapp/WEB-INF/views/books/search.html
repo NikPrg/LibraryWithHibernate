@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../../resources/styles(b).css" type="text/css" rel="stylesheet" />
+
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/books/search}">
+    <label for="query" style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large">Введите поисковой запрос: </label>
+    <input type="text" id="query" name="query"/>
+    <br/>
+    <button style="border: none; width: 75px; height: 20px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >Искать</button>
+</form>
+
+<div th:if="${books}">
+    <div th:if="${books.isEmpty()}">
+        <span style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large">Книг не найдено</span>
+    </div>
+
+    <div th:each="book : ${books}">
+        <p style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large" th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</p>
+
+        <div th:if="${book.getOwner() != null}">
+            <span style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large">Книга сейчас у: </span> <span style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large" th:text="${book.getOwner().getFullName()}">Person Name</span>
+        </div>
+
+        <div th:if="${book.getOwner() == null}">
+            <span style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large">Книга свободна</span>
+        </div>
+
+
+    </div>
+</div>
+
+<form th:method="GET" th:action="@{/books}">
+    <button style="border: none;position: fixed; right: 0; bottom: 1%; width: 100px; height: 25px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >На главную страницу</button>
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../../resources/styles(a).css" type="text/css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+
+<form class="decor" th:method="POST" th:action="@{/people/{id}(id = ${person.getId()})}" th:object="${person}">
+    <div class="form-left-decoration"></div>
+    <div class="form-right-decoration"></div>
+    <div class="circle"></div>
+    <div class="form-inner">
+        <label style="color: #707981" for="full_name">Полное имя</label>
+        <input type="text" th:field="*{fullName}" id="full_name"/>
+
+        <label style="color: #707981" for="year">Год рождения</label>
+        <input type="text" th:field="*{yearOfBirth}" id="year"/>
+        <input type="submit" value="Редактировать!">
+    </div>
+</form>
+
+</body>
+</html>

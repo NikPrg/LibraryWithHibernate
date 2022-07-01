@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../../resources/styles(b).css" type="text/css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>Все книги</title>
+    <style>
+        table {
+            width: 250px; /* Ширина таблицы */
+            margin: auto; /* Выравниваем таблицу по центру */
+            border-collapse: collapse;
+            font-size: 12px;
+
+        }
+
+        td {
+            /* Рамка вокруг таблицы */
+            text-align: center; /* Выравниваем текст по центру ячейки */
+            border: 2px none #F6511D;
+            border-bottom-style: solid;
+            color: #F7FFE0;
+            font-family: 'Comic Sans MS', serif;
+            padding: 8px 10px;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div style="font-family: 'Comic Sans MS',serif; text-align: center; font-size: xx-large; color: #F7FFE0;
+     ">
+    Список всех книг
+</div>
+<br/>
+
+
+<table>
+    <thead>
+    <tr>
+        <td>Название книги</td>
+        <td>Автор</td>
+        <td>Год</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.getTitle()}">TITLE</td>
+        <td th:text="${book.getAuthor()}">AUTHOR</td>
+        <td th:text="${book.getYear()}">YEAR</td>
+        <th>
+            <form th:method="GET" th:action="@{/books/{id}(id = ${book.getId()})}">
+                <button   style="border: none; width: 70px; height: 15px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-button" >Подробнее</button>
+            </form>
+        </th>
+    </tr>
+    </tbody>
+</table>
+
+
+<form th:method="GET" th:action="@{/books/new}">
+    <button style="border: none;position: fixed; right: 0; bottom: 1%; width: 100px; height: 25px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >Добавить книгу</button>
+</form>
+
+<form th:method="GET" th:action="@{/people}">
+    <button style="border: none;position: fixed; top: 0; bottom:  1%; width: 85px; height: 25px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >Список пользователей</button>
+</form>
+
+
+<form th:method="GET" th:action="@{/books/search}">
+    <button style="border: none;position: fixed; left: 0; bottom: 1%; width: 100px; height: 25px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >Искать книгу по названию</button>
+</form>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <link href="../../../resources/styles(b).css" type="text/css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>Все пользователи</title>
+    <style>
+        table {
+            width: 250px; /* Ширина таблицы */
+            margin: auto; /* Выравниваем таблицу по центру */
+            border-collapse: collapse;
+            font-size: 12px;
+
+        }
+
+        td {
+            /* Рамка вокруг таблицы */
+            text-align: center; /* Выравниваем текст по центру ячейки */
+            border: 2px none #F6511D;
+            border-bottom-style: solid;
+            color: #F7FFE0;
+            font-family: 'Comic Sans MS', serif;
+            padding: 8px 10px;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div style="font-family: 'Comic Sans MS',serif;
+     text-align: center;
+     font-size: xx-large;
+
+     color: #F7FFE0;
+     ">
+
+    Все пользователи библиотеки
+
+</div>
+<br/>
+
+
+<table>
+    <thead>
+    <tr>
+        <td>Полное имя</td>
+        <td>Год рождения</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${people}">
+        <td th:text="${person.getFullName()}">FULL_NAME</td>
+        <td th:text="${person.getYearOfBirth()}">YEAR_OF_BIRTH</td>
+        <th>
+            <form th:method="GET" th:action="@{/people/{id}(id = ${person.getId()})}">
+            <button   style="border: none; width: 70px; height: 15px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-button" >Посмотреть</button>
+            </form>
+        </th>
+    </tr>
+    </tbody>
+</table>
+
+
+<br/>
+<form th:method="GET" th:action="@{/people/new}">
+<button style="border: none;position: fixed; right: 0; bottom: 1%; width: 100px; height: 25px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >Добавить пользователя</button>
+</form>
+
+<form th:method="GET" th:action="@{/books}">
+    <button style="border: none;position: fixed; left: 0; bottom: 1%; width: 100px; height: 25px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >Посмотреть список всех книг</button>
+</form>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

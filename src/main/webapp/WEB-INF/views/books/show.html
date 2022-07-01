@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../../resources/styles(b).css" type="text/css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Профайл</title>
+    <style>
+        table{
+            border-spacing: 1.5em
+        }
+    </style>
+</head>
+<body>
+<div style="font-family: 'Comic Sans MS',serif; text-align: center; font-size: large; color: #F7FFE0;">
+    Информация о книге:
+</div>
+<br/>
+<table >
+    <thead>
+    <tr>
+
+        <td>
+            <a style="color: #F7FFE0;font-family: 'Comic Sans MS',serif; font-size: large; text-align: start">Название книги:&emsp;</a>
+            <a class="a-gradient" style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large" th:text="${book.getTitle()}">TITLE</a>
+        </td>
+
+    </tr>
+
+    <tr>
+
+        <td>
+            <a style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large; text-align: start">Автор:&emsp;</a>
+            <a class="a-gradient" style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large" th:text="${book.getAuthor()}">AUTHOR</a>
+        </td>
+
+
+    </tr>
+
+    <tr>
+
+        <td>
+            <a style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large; text-align: start">Год:&emsp;</a>
+            <a class="a-gradient" style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large" th:text="${book.getYear()}">YEAR</a>
+        </td>
+
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+            <div th:if="${owner}" style="position: relative">
+
+                <span style="color: #F7FFE0; font-size: large; font-family: 'Comic Sans MS',serif; text-align: start">Книга сейчас у: </span> <span class="a-gradient" style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large" th:text="${owner.getFullName()}">Person Name</span>
+                <form  th:method="POST" th:action="@{/books/{id}/release(id=${book.getId()})}">
+                    <button style="border: none; font-family: 'Comic Sans MS',serif;  width: 70px; height: 15px; border-radius: 10px; padding: 0;" class="gradient-button" >Освободить</button>
+                </form>
+            </div>
+
+            <div th:if="${people}">
+                <span style="color: #F7FFE0; font-family: 'Comic Sans MS',serif; font-size: large; text-align: start">Эта книга свободна. Кому назначить ее?</span>
+                <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
+                    <label for="person" style=" color: #F7FFE0;font-family: 'Comic Sans MS',serif;">Выберите человека</label>
+                    <select th:object="${person}" th:field="*{id}" id="person">
+                        <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getFullName()}">
+                        </option>
+                    </select>
+                    <button style="border: none; font-family: 'Comic Sans MS',serif; width: 70px; height: 15px; padding: 0" class="gradient-button" >Назначить</button>
+                </form>
+            </div>
+
+
+        </td>
+
+
+    </tr>
+
+    </thead>
+
+</table>
+
+<form th:method="POST" th:action="@{/books/{id}/delete(id = ${book.getId()})}">
+    <button style="border: none;position: fixed; right: 0; bottom: 1%; width: 92px; height: 18px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >Удалить</button>
+</form>
+
+<form th:method="GET" th:action="@{/books}">
+    <button style="border: none;position: fixed; top: 0; bottom:  1%; width: 75px; height: 25px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >На главную страницу</button>
+</form>
+
+
+
+<form th:method="GET" th:action="@{/books/{id}/edit(id = ${book.getId()})}">
+    <button style="border: none;position: fixed; left: 0; bottom: 1%; width: 92px; height: 18px; padding: 0; font-family: 'Comic Sans MS', serif" class="gradient-buttonS" >Редактировать</button>
+</form>
+
+
+</body>
+</html>
